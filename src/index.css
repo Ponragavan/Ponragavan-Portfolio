@@ -1,0 +1,49 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html{
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+}
+
+.toggle-animation,.animated {
+  animation: toggle 0.5s ease-in-out;
+}
+
+.typing{
+  animation: type 3s steps(20,end) infinite,blink .5s step-end infinite;
+  /* animation-delay: .5s infinite; */
+}
+
+@keyframes toggle {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes type {
+  from {
+    width: 0;
+  }
+  to{
+    width: 100%;
+  }
+}
+
+@keyframes blink {
+  from,to{
+    border-color: transparent;
+  }
+  50%{
+    border-color: white;
+  }
+}
