@@ -34,7 +34,7 @@ const Home = () => {
       style={{ backgroundImage: 'url("bg.png")' }}
     >
       <h2 className="text-6xl max-[500px]:text-3xl font-bold bg-gradient-to-b from-gray-700 via-gray-500 to-gray-300 text-transparent bg-clip-text">
-        Hi, I am Ponragavan M
+        Hi, I am Ponragavan
       </h2>
 
       <div className="flex items-center text-lg text-white text-nowrap">
