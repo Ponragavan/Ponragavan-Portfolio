@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
-import emailjs from '@emailjs/browser';
-import { toast } from 'react-toastify';
+import emailjs from "@emailjs/browser";
+import { toast } from "react-toastify";
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -8,6 +8,7 @@ const Contact = () => {
     email: "",
     message: "",
   });
+  const [loading, setLoading] = useState(false);
   const form = useRef();
 
   const handleChange = (e) => {
@@ -18,34 +19,34 @@ const Contact = () => {
     }));
   };
 
-
-  const sendEmail = (e) => {
+  const sendEmail = async (e) => {
     e.preventDefault();
-
-    emailjs
+    setLoading(true);
+    await emailjs
       .sendForm("service_3z4rfjd", "template_5ozsdns", form.current, {
         publicKey: "gCPlb3j9O3KWsCZRN",
       })
       .then(
         () => {
-          toast.success("Email sent successfully")
+          toast.success("Email sent successfully");
         },
         (error) => {
           toast.error(error.message);
         }
       );
-      setFormData({
-        name: "",
-        email: "",
-        message: "",
-      });
+    setLoading(false);
+    setFormData({
+      name: "",
+      email: "",
+      message: "",
+    });
   };
 
   return (
     <section
       id="contact"
       className="min-h-screen p-5 pt-40 bg-cover text-white"
-      style={{backgroundImage: 'url("contacts.png")'}}
+      style={{ backgroundImage: 'url("contacts.png")' }}
     >
       <h2 className="text-4xl font-bold mb-5 max-sm:text-2xl text-center">
         Get in Touch With Me
@@ -108,9 +109,13 @@ const Contact = () => {
         </div>
         <button
           type="submit"
-          className="px-6 py-3 bg-gradient-to-br from-purple-700 to-pink-600 rounded-full text-white font-semibold transition-all duration-300 ease-in-out hover:bg-gradient-to-br hover:from-pink-700 hover:to-purple-600"
+          className="relative flex justify-center px-6 py-3 bg-gradient-to-br from-purple-700 to-pink-600 rounded-full text-white font-semibold transition-all duration-300 ease-in-out hover:bg-gradient-to-br hover:from-pink-700 hover:to-purple-600"
         >
-          Send Message
+          {loading ? (
+            <span className="h-6 w-6 border-4 border-t-transparent border-white rounded-full animate-spin"></span>
+          ) : (
+            "Send Message"
+          )}
         </button>
       </form>
     </section>
